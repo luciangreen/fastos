@@ -1,0 +1,10 @@
+{
+  "name": "fastos",
+  "version": "0.1.0",
+  "description": "fastos: optimise folders of Prolog repos with mnns, keeping only what the tests confirm",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "license": "BSD-3-Clause"
+}

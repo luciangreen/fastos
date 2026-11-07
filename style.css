@@ -1,0 +1,22 @@
+main.fo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px; }
+main.fo .wide { grid-column: 1 / -1; }
+@media (max-width: 760px) { main.fo { grid-template-columns: 1fr; } }
+main.fo .panel { max-height: 46vh; overflow: auto; }
+main.fo .panel.wide { max-height: none; }
+.small { font-size: 12.5px; }
+.opts { display: grid; gap: 8px; }
+.opts label { display: grid; gap: 2px; font-size: 13px; color: var(--quiet); }
+.opts label.check { display: flex; gap: 6px; align-items: center; }
+.opts input[type='text'], .opts input[type='number'] { min-height: 34px; color: var(--ink); }
+.bigbar { height: 10px; border-radius: 5px; background: var(--line); overflow: hidden; }
+.bigbar span { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.3s; }
+table.results { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+table.results th, table.results td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.results th { color: var(--quiet); font-weight: 600; }
+td.saved { color: var(--good); font-weight: 600; }
+td.rejected, td.failed { color: var(--bad); font-weight: 600; }
+td.cmd code { font-family: var(--mono); font-size: 12px; overflow-wrap: anywhere; }
+td.cmd button { min-height: 28px; padding: 0 8px; margin-left: 4px; }
+td .note { display: block; color: var(--quiet); font-weight: 400; font-size: 12px; }
+details summary { cursor: pointer; color: var(--quiet); margin: 8px 0; }
+li.repo .name::after { content: ' · repo'; color: var(--quiet); font-size: 12px; }

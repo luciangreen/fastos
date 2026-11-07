@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>fastos</title>
+  <link rel="stylesheet" href="/shared/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="bar">
+    <h1>fastos</h1>
+    <span class="quiet">Optimise Prolog repos with mnns; keep only what the tests confirm</span>
+    <span class="spacer"></span>
+    <button id="start" class="primary">Optimise this folder</button>
+    <button id="interrupt" disabled>Interrupt</button>
+  </header>
+  <main class="fo">
+    <section class="panel" aria-label="Folder">
+      <h2>Folder or folder of repos</h2>
+      <div id="crumbs" class="crumbs"></div>
+      <p id="repoCount" class="quiet small"></p>
+      <ul id="folders" class="files"></ul>
+    </section>
+    <section class="panel" aria-label="Options">
+      <h2>Options</h2>
+      <form id="opts" class="opts">
+        <label>mnns folder <input id="mnns" type="text" class="mono"></label>
+        <label>Test runs (median is used) <input id="runs" type="number" min="1" max="20"></label>
+        <label>New file names end in <input id="suffix" type="text" class="mono"></label>
+        <label>Stack limit in the run command <input id="stackLimit" type="text" class="mono"></label>
+        <label>Start goal in the run command <input id="goal" type="text" class="mono"></label>
+        <label>Test command (blank: find it) <input id="test" type="text" class="mono" placeholder="e.g. swipl -q -s tests/run.pl"></label>
+        <label class="check"><input id="keepUntested" type="checkbox"> Save repos without tests too (not checked)</label>
+      </form>
+    </section>
+    <section class="panel wide" aria-label="Progress and results">
+      <div class="row">
+        <h2>Progress</h2>
+        <span id="status" class="quiet"></span>
+      </div>
+      <div class="bigbar" aria-hidden="true"><span id="bar"></span></div>
+      <p id="step" class="quiet small"></p>
+      <table class="results">
+        <thead><tr><th>Repo</th><th>Result</th><th>Optimised files</th><th>Tests before</th><th>After</th><th>Speed</th><th>Run command</th></tr></thead>
+        <tbody id="results"></tbody>
+      </table>
+      <details>
+        <summary>Full output</summary>
+        <pre id="output" class="output"></pre>
+      </details>
+    </section>
+  </main>
+</body>
+</html>
