@@ -11,12 +11,14 @@ const RUNNER = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 
 let base, root, bin;
 
 // A stand-in for swipl:
-//  * "swipl .../optimise.pl IN OUT" acts like mnns: "% SLOW" code becomes "% FAST"; "% BREAK" code changes behaviour
+//  * "swipl .../optimise.pl -- IN OUT" acts like mnns: "% SLOW" code becomes "% FAST"; "% BREAK" code changes behaviour
 //  * anything else is a test run: slow if any .pl file in the folder says SLOW, and prints a result
 const FAKE = `#!/usr/bin/env node
 const fs = require('fs'), path = require('path');
 const a = process.argv.slice(2);
 if (a[0] && a[0].endsWith('optimise.pl')) {
+  if (a[1] !== '--') { console.log('ERROR: swipl would load the input file'); process.exit(1); }
+  a.splice(1, 1);
   const src = fs.readFileSync(a[1], 'utf8');
   if (src.includes('SYNTAX')) { console.log('MNN_OPTIMISE error syntax not supported'); process.exit(1); }
   const out = src.replace(/% SLOW/g, '% FAST').replace(/% BREAK/g, '% BROKEN');

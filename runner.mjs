@@ -156,7 +156,7 @@ async function optimiseRepo(repoAbs, o, mnnsAbs, index, total) {
     if (stopping) throw new Error('Interrupted');
     step('optimising', { file: f, done: k, of: sources.length });
     const tmpOut = path.join(optCopy, `${f}.fastos-out.pl`);
-    const r = await run(['swipl', path.join(mnnsAbs, 'optimise.pl'), path.join(origCopy, f), tmpOut], optCopy, o.timeout);
+    const r = await run(['swipl', path.join(mnnsAbs, 'optimise.pl'), '--', path.join(origCopy, f), tmpOut], optCopy, o.timeout);
     const rep = parseOptimiseLine(r.out);
     if (rep.ok && rep.changed && fs.existsSync(tmpOut)) {
       fs.renameSync(tmpOut, path.join(optCopy, f));
