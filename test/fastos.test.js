@@ -57,3 +57,9 @@ test('finds tests, the start file and the run command', () => {
   assert.equal(median([5, 1, 3]), 3);
   assert.equal(median([4, 1, 3, 2]), 2.5);
 });
+
+test('bare names in load lists point at the _fast copies too', () => {
+  const src = ':- [helper, other].\n:- ensure_loaded([other, lists]).\nconsult([helper]).\nx :- [a] = [helper].';
+  assert.equal(rewriteRefs(src, new Set(['helper', 'other'])),
+    ':- [helper_fast, other_fast].\n:- ensure_loaded([other_fast, lists]).\nconsult([helper_fast]).\nx :- [a] = [helper].');
+});
