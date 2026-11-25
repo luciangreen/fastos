@@ -42,7 +42,7 @@ It needs mnns with its overall optimise command (`swipl optimise.pl IN OUT`). Th
 4. **The optimised copy is tested.** Its output and exit code must match the original exactly, ignoring timings and inference counts. If they don't, nothing is saved.
 5. **Files are saved** next to the originals:
    - Every source file is saved as `name_fast.pl`. Files mnns optimised get their optimised code; the rest are copies.
-   - `consult`, `include` and `use_module` lines point at the other `_fast` files, so the `_fast` set runs on its own.
+   - `consult`, `include`, `ensure_loaded` and `use_module` lines, and load lists such as `:- [a, b].`, point at the other `_fast` files, so the `_fast` set runs on its own.
    - Each saved file starts with a `% fastos:` line. fastos never overwrites a file without that line.
    - `fastos-run.txt` holds the run command, for example:
 
